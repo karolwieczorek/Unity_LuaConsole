@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using MoonSharp.Interpreter;
+using UnityLua.Assets.Code;
 
 namespace UnityPythonConsole.Assets.Code {
     public class LuaManager : MonoBehaviour {
@@ -34,7 +35,13 @@ namespace UnityPythonConsole.Assets.Code {
         }
 
         void MoonSharpFactorial() {
+            UserData.RegisterProxyType<TransformProxy, Transform>(r => new TransformProxy(r));
+            UserData.RegisterAssembly();
+            UserData.RegisterType<LuaVector3>();
+
             luaEngine = new Script();
+            luaEngine.Globals["Circle"] = GameObject.Find("Circle").transform;
+
             luaEngine.Options.DebugPrint = s => { luaConsole.AddLuaLog(s); };
             
 
