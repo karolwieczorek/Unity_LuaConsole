@@ -36,67 +36,29 @@ namespace UnityLuaConsole.Assets.Code {
         void MoonSharpFactorial() {
             UserData.RegisterAssembly();
 
-            UserData.RegisterProxyType<TransformProxy, Transform>(r => new TransformProxy(r));
+            UserData.RegisterType<Vector3>();
+            UserData.RegisterType<KeyCode>();
+            UserData.RegisterType<Input>();
+            UserData.RegisterType<GameObject>();
 
+            UserData.RegisterType<Transform>();
 
-            UserData.RegisterType<LuaVector3>();
+            //UserData.RegisterProxyType<TransformProxy, Transform>(r => new TransformProxy(r));
+            
+
             UserData.RegisterType<EventArgs>();
             UserData.RegisterType<UnityMethodsEvents.Events>();
 
-
             luaEngine = new Script();
+            luaEngine.Globals["Vector3"] = UserData.CreateStatic<Vector3>();
+            luaEngine.Globals["KeyCode"] = UserData.CreateStatic<KeyCode>();
+            luaEngine.Globals["Input"] = UserData.CreateStatic<Input>();
+            luaEngine.Globals["GameObject"] = UserData.CreateStatic<GameObject>();
+
             luaEngine.Globals["unityEvents"] = unityMethodsEvents.events;
             luaEngine.Globals["Circle"] = GameObject.Find("Circle").transform;
-
-            luaEngine.Options.DebugPrint = s => { luaConsole.AddLuaLog(s); };
             
-
-//            luaEngine.Globals["func"] = (Action<string>)pyConsole.AddLuaLog;
-//            luaEngine.DoString(@"
-//func(""wow"");
-//            ");
-
-//            DynValue res = luaEngine.DoString(script);
-//            Debug.Log(res.Number);
+            luaEngine.Options.DebugPrint = s => { luaConsole.AddLuaLog(s); };
         }
-
-        /*
-        Microsoft.Scripting.Hosting.ScriptEngine engine;
-        Microsoft.Scripting.Hosting.ScriptScope scope;
-
-        string pythonScript;
-        private void Awake() {
-            StartCoroutine(GetPythonScript());
-            pyConsole.SetExecuteAction(ExecuteInputCommand);
-        }
-
-        private void ExecuteInputCommand(string expression) {
-            engine.Execute(expression, scope);
-        }
-
-        private void Start() {
-            engine = Python.CreateEngine();
-            engine.Runtime.LoadAssembly(typeof(GameObject).Assembly);
-
-            scope = engine.CreateScope();
-            scope.SetVariable("pyConsole", pyConsole);
-            scope.SetVariable("unityEvents", unityMethodsEvents);
-            engine.Execute(pythonScript, scope);
-        }
-        
-        IEnumerator GetPythonScript() {
-            string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "python.py");
-
-            string result;
-            if (filePath.Contains("://") || filePath.Contains(":///")) {
-                UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(filePath);
-                yield return www.SendWebRequest();
-                result = www.downloadHandler.text;
-            } else
-                result = System.IO.File.ReadAllText(filePath);
-
-            pythonScript = result;
-        }
-        */
     }
 }
