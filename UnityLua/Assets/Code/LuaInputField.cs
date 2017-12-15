@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-namespace UnityPythonConsole.Assets.Code {
+namespace UnityLuaConsole.Assets.Code {
     [RequireComponent(typeof(InputField))]
     public class LuaInputField : MonoBehaviour {
         InputField inputField;

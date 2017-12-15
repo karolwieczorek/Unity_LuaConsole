@@ -1,7 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using UnityEngine;
 
-namespace UnityLua.Assets.Code
+namespace UnityLuaConsole.Assets.Code
 {
     public class TransformProxy
     {

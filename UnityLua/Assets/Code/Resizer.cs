@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityPythonConsole.Assets.Code { 
+namespace UnityLuaConsole.Assets.Code { 
     public class Resizer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
         public float minSize;
         public RectTransform resizedTransform;

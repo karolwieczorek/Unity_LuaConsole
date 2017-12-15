@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using MoonSharp.Interpreter;
-using UnityLua.Assets.Code;
 
-namespace UnityPythonConsole.Assets.Code {
+namespace UnityLuaConsole.Assets.Code {
     public class LuaManager : MonoBehaviour {
         [SerializeField] LuaConsole luaConsole;
         [SerializeField] UnityMethodsEvents unityMethodsEvents;

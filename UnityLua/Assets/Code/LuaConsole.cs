@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace UnityPythonConsole.Assets.Code {
+namespace UnityLuaConsole.Assets.Code {
     public class LuaConsole : MonoBehaviour {
         [SerializeField] LuaInputField input;
         [SerializeField] Text consoleText;

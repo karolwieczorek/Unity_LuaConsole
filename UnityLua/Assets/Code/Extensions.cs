@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UnityPythonConsole.Assets.Code {
+namespace UnityLuaConsole.Assets.Code {
     public static class Extensions {
         public static IEnumerable<T> TakeLast<T>(this IEnumerable<T> source, int N) {
             return source.Skip(Math.Max(0, source.Count() - N));
