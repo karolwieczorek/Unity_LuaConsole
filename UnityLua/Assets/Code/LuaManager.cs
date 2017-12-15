@@ -34,11 +34,18 @@ namespace UnityLuaConsole.Assets.Code {
         }
 
         void MoonSharpFactorial() {
-            UserData.RegisterProxyType<TransformProxy, Transform>(r => new TransformProxy(r));
             UserData.RegisterAssembly();
+
+            UserData.RegisterProxyType<TransformProxy, Transform>(r => new TransformProxy(r));
+
+
             UserData.RegisterType<LuaVector3>();
+            UserData.RegisterType<EventArgs>();
+            UserData.RegisterType<UnityMethodsEvents.Events>();
+
 
             luaEngine = new Script();
+            luaEngine.Globals["unityEvents"] = unityMethodsEvents.events;
             luaEngine.Globals["Circle"] = GameObject.Find("Circle").transform;
 
             luaEngine.Options.DebugPrint = s => { luaConsole.AddLuaLog(s); };
